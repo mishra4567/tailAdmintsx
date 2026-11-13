@@ -1,0 +1,28 @@
+// ./vite.config.js
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "node:path";
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ["resources/js/app.tsx"],
+            refresh: true,
+        }),
+        react(),
+        tailwindcss(),
+    ],
+
+    resolve: {
+        alias: {
+            "@": path.resolve(import.meta.dirname, "resources/js"),
+        },
+        dedupe: ["react", "react-dom", "@inertiajs/react"],
+    },
+
+    build: {
+        chunkSizeWarningLimit: 1000,
+    },
+});
